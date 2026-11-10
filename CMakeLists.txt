@@ -19,7 +19,7 @@ if(NOT SFML_FOUND)
     FetchContent_MakeAvailable(SFML)
 endif()
 
-add_executable(main src/main.cpp "src/stdafx.cpp" "src/State.cpp"  "src/StateStack.cpp" "src/Application.cpp" "src/SceneNode.cpp" )
+add_executable(main src/main.cpp "src/stdafx.cpp" "src/State.cpp"  "src/StateStack.cpp" "src/Application.cpp" "src/SceneNode.cpp"  "src/World.cpp")
 add_custom_target(copy_assets ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
         ${CMAKE_SOURCE_DIR}/assets

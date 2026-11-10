@@ -1,21 +1,17 @@
-#include <SFML/Graphics.hpp>
+#include "Application.h"
 
 int main()
 {
-	sf::RenderWindow window( sf::VideoMode( { 200, 200 } ), "SFML works!" );
-	sf::CircleShape shape( 100.f );
-	shape.setFillColor( sf::Color::Green );
-
-	while ( window.isOpen() )
+	try
 	{
-		while ( const std::optional event = window.pollEvent() )
-		{
-			if ( event->is<sf::Event::Closed>() )
-				window.close();
-		}
+		// App currently pushes the "Game State".
+		// Current "World" in game state is temperory until Mehmet finishes the world<-level<-room hierarchy.
 
-		window.clear();
-		window.draw( shape );
-		window.display();
+		Application app;
+		app.run();
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << "EXCEPTION: " << e.what();
 	}
 }
