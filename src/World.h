@@ -40,5 +40,5 @@ private:
 	const TextureManager& mTextureManager;
 
 	sf::Sprite mBackground;
-	// Player pointer here
+	// Player pointer here, it will hold player during room transitions.
 };
