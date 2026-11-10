@@ -19,7 +19,7 @@ enum class FontID
 
 
 template <typename Resource, typename Identifier>
-class RecourceManager
+class ResourceManager
 {
 public:
 	void							load(Identifier id, const std::string& filename);
@@ -32,10 +32,10 @@ private:
 		std::unique_ptr<Resource>>	mResourceMap;
 };
 
-// Implementaions
+// Implementations
 
 template<typename Resource, typename Identifier>
-void RecourceManager<Resource, Identifier>::load(Identifier id, const std::string& filename)
+void ResourceManager<Resource, Identifier>::load(Identifier id, const std::string& filename)
 {
 	auto resource = std::make_unique<Resource>(filename);
 
@@ -44,25 +44,25 @@ void RecourceManager<Resource, Identifier>::load(Identifier id, const std::strin
 }
 
 template<typename Resource, typename Identifier>
-Resource& RecourceManager<Resource, Identifier>::get(Identifier id)
+Resource& ResourceManager<Resource, Identifier>::get(Identifier id)
 {
 	return *mResourceMap.at(id);
 }
 
 template<typename Resource, typename Identifier>
-const Resource& RecourceManager<Resource, Identifier>::get(Identifier id) const
+const Resource& ResourceManager<Resource, Identifier>::get(Identifier id) const
 {
 	return *mResourceMap.at(id);
 }
 
 // Aliases
 
-using TextureManager = RecourceManager<sf::Texture, TextureID>;
+using TextureManager = ResourceManager<sf::Texture, TextureID>;
 
-using FontManager = RecourceManager<sf::Font, FontID>;
-
-template <typename Identifier>
-using SoundBufferManager = RecourceManager<sf::SoundBuffer, Identifier>;
+using FontManager = ResourceManager<sf::Font, FontID>;
 
 template <typename Identifier>
-using MusicManager = RecourceManager<sf::Music, Identifier>;
+using SoundBufferManager = ResourceManager<sf::SoundBuffer, Identifier>;
+
+template <typename Identifier>
+using MusicManager = ResourceManager<sf::Music, Identifier>;

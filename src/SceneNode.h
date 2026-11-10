@@ -26,7 +26,7 @@ private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override final;	
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;			// For derived classes to override if they will be drawn.
 
-	virtual void updateCurrent(sf::Time dt);													// This function should be overriden to update the object.
+	virtual void updateCurrent(sf::Time dt);													// This function should be overridden to update the object.
 	void updateChildren(sf::Time dt);
 
 /*==================================================================

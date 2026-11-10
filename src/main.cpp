@@ -5,7 +5,7 @@ int main()
 	try
 	{
 		// App currently pushes the "Game State".
-		// Current "World" in game state is temperory until Mehmet finishes the world<-level<-room hierarchy.
+		// Current "World" in game state is temporary.
 
 		Application app;
 		app.run();

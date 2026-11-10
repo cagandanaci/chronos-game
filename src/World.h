@@ -4,15 +4,19 @@
 #include "ResourceManager.h"
 
 /*
-	Represents the game world and stores the view
+*===============================================================
+*						WORLD CLASS
+*===============================================================
 */
+
+// TODO (Mehmet) : Create the composition hierarchy between world◆-level◆-room.	
 
 class World
 {
 public:
 	explicit World(sf::RenderWindow& window, const TextureManager& textureManager);
 
-	// Deleted
+	// Deleted copy constructors.
 	World(const World&) = delete;
 	World& operator=(const World&) = delete;
 

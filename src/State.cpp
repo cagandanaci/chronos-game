@@ -108,12 +108,4 @@ void PauseState::draw()
 	window->setView(window->getDefaultView());
 	window->draw(mFilter);
 	window->draw(mText);
-
-	// for debug
-	/*
-	sf::RectangleShape RECT(mText.getGlobalBounds().size);
-	RECT.setOrigin(RECT.getSize() / 2.f);
-	RECT.setPosition(mText.getPosition());
-	window->draw(RECT);
-	*/
 }
