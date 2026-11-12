@@ -22,6 +22,7 @@
 // TODO(Mustafa): Create the animation component class. It will not be inherited from another class.
 // It will store important information about an entity's sprite sheet.
 // It will also have a function that returns the necessary frame rectangle (as an sf::IntRect object) for the entity class to set as its texture rectangle.
+// That function would step to the next frame, and return the first frame when the clip being used reach its end.
 
 class SceneNode : public sf::Transformable, public sf::Drawable
 {
@@ -38,7 +39,7 @@ public:
 
 	sf::Transform getWorldTransform() const;			// Returns the transform relative to the game world.
 
-	void update(sf::Time dt);
+	void update(sf::Time dt);							
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override final;	
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;			// For derived classes to override if they will be drawn.
