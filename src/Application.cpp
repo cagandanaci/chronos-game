@@ -14,14 +14,14 @@ Application::Application()
 
 void Application::loadTextures()
 {
-	// Textures loaded here are temporary.
+	mTextureManager.load(TextureID::Player, "assets/textures/character-sheet.png");
 
-	mTextureManager.load(TextureID::MenuBackground, "assets/textures/menu-background.png");
+	// Textures loaded after this comment are temporary and will be changed.
 
-	mTextureManager.load(TextureID::Background, "assets/textures/background.png");
+	mTextureManager.load(TextureID::MenuBackground, "assets/textures/temp/menu-background.png");
+
+	mTextureManager.load(TextureID::Background, "assets/textures/temp/background.png");
 	mTextureManager.get(TextureID::Background).setRepeated(true);
-
-	mTextureManager.load(TextureID::Player, "assets/textures/soldier.png");
 }
 
 void Application::loadFonts()
