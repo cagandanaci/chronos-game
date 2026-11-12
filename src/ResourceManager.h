@@ -17,6 +17,7 @@ enum class FontID
 *===============================================================
 */
 
+// This class stores the game's resources and provides access to them.
 
 template <typename Resource, typename Identifier>
 class ResourceManager

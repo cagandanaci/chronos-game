@@ -41,9 +41,9 @@ public:
 	State(StateStack& stack, Context context);
 	virtual ~State() = default;
 
-	// processEvents and update returns a bool. If it is false, 
-	// state stops the states before it to see states under it 
-	// from calling their own processEvents and update functions.
+	// processEvents and update return a bool. If it is false,
+	// the state prevents the states below it from calling their own
+	// processEvents and update functions.
 	virtual bool processEvents(const std::optional<sf::Event> event) = 0;
 	virtual bool update(sf::Time dt) = 0;
 	

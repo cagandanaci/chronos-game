@@ -10,6 +10,15 @@
 */
 
 // TODO (Mehmet) : Create the composition hierarchy between world◆-level◆-room.	
+// Levels should store every room the player will enter.
+// Rooms will store the root of the scene graph, like World does in the book's example.
+// The layer system will also be in the room.
+// Rooms will also build scenes in their buildScene functions by creating layers,
+// attaching child scene nodes to their parents, and providing access to the necessary resources for every scene node.
+// The book has an example of the buildScene function as well.
+
+// Load resources in Application.cpp and use the resource manager to access them.
+
 
 class World
 {
