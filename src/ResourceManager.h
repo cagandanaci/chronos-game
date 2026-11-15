@@ -19,41 +19,45 @@ enum class FontID
 
 // This class stores the game's resources and provides access to them.
 
-template <typename Resource, typename Identifier>
+template <typename Resource, typename ID>
 class ResourceManager
 {
 public:
-	void							load(Identifier id, const std::string& filename);
-
-	Resource&						get(Identifier id);
-	const Resource&					get(Identifier id) const;
+	void load(ID id, const std::string& filepath);
+	Resource& get(ID id);
+	const Resource& get(ID id) const;
 
 private:
-	std::map<Identifier, 
-		std::unique_ptr<Resource>>	mResourceMap;
+	std::unordered_map<ID, std::unique_ptr<Resource>> mResourceList;
 };
+
 
 // Implementations
 
-template<typename Resource, typename Identifier>
-void ResourceManager<Resource, Identifier>::load(Identifier id, const std::string& filename)
+template<typename Resource, typename ID>
+inline void ResourceManager<Resource, ID>::load(ID id, const std::string& filepath)
 {
-	auto resource = std::make_unique<Resource>(filename);
-
-	auto inserted = mResourceMap.insert({ id, std::move(resource) });
+	auto resource = std::make_unique<Resource>(filepath);
+	auto inserted = mResourceList.insert(std::make_pair(id, std::move(resource)));
 	assert(inserted.second);
 }
 
-template<typename Resource, typename Identifier>
-Resource& ResourceManager<Resource, Identifier>::get(Identifier id)
+template<typename Resource, typename ID>
+inline Resource& ResourceManager<Resource,ID>::get(ID id)
 {
-	return *mResourceMap.at(id);
+	auto found = mResourceList.find(id);
+	assert(found != mResourceList.end());
+
+	return *found->second;
 }
 
 template<typename Resource, typename Identifier>
 const Resource& ResourceManager<Resource, Identifier>::get(Identifier id) const
 {
-	return *mResourceMap.at(id);
+	auto found = mResourceList.find(id);
+	assert(found != mResourceList.end());
+
+	return *found->second;
 }
 
 // Aliases

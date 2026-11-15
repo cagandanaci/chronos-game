@@ -37,7 +37,6 @@ public:
 		FontManager* fontManager;
 	};
 
-public:
 	State(StateStack& stack, Context context);
 	virtual ~State() = default;
 

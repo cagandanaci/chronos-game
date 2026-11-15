@@ -51,7 +51,7 @@ void StateStack::clearStates()
 	mPendingList.emplace_back(Clear);
 }
 
-//
+// Functions
 
 bool StateStack::isEmpty() const
 {
