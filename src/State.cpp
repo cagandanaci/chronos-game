@@ -29,6 +29,76 @@ State::Context State::getContext() const
 	return mContext;
 }
 
+// MAIN MENU STATE
+
+MenuState::MenuState(StateStack& stack, Context context)
+	: State(stack, context),
+	mBackground(getContext().textureManager->get(TextureID::MenuBackground)),
+	mTitle(getContext().fontManager->get(FontID::PixelOp)),
+	mStartText(getContext().fontManager->get(FontID::PixelOp)),
+	mExitText(getContext().fontManager->get(FontID::PixelOp))
+{
+	mTitle.setCharacterSize(48);
+	mTitle.setString("SOME ROGUELIKE GAME");
+	mTitle.setFillColor(sf::Color(190,0,0));
+	mTitle.setOutlineColor(sf::Color::Black);
+	mTitle.setOutlineThickness(1.f);
+	mTitle.setOrigin(mTitle.getLocalBounds().position + mTitle.getGlobalBounds().size / 2.f);
+	mTitle.setPosition(sf::Vector2f(getContext().window->getSize().x / 2.f, getContext().window->getSize().y / 6.f));
+
+	mStartText.setCharacterSize(36);
+	mStartText.setString("START GAME");
+	mStartText.setOutlineColor(sf::Color::Black);
+	mStartText.setOutlineThickness(1.f);
+	mStartText.setOrigin(mTitle.getLocalBounds().position + mTitle.getGlobalBounds().size / 2.f);
+	mStartText.setPosition(sf::Vector2f(getContext().window->getSize().x * 7.f / 8.f, getContext().window->getSize().y / 2.f));
+
+	mExitText = mStartText;
+	mExitText.setString("EXIT");
+
+	mStartText.move({ 0.f, -20.f });
+	mExitText.move({0.f, 20.f});
+}
+
+bool MenuState::processEvents(const std::optional<sf::Event> event)
+{
+	if (event->is<sf::Event::Closed>())
+		getContext().window->close();
+
+	if (auto mouseButton = event->getIf<sf::Event::MouseButtonPressed>())
+	{
+		if (mouseButton->button == sf::Mouse::Button::Left)
+		{
+			auto cursor = sf::FloatRect(sf::Vector2f(mouseButton->position), { 0.1f, 0.1f });
+			if (cursor.findIntersection(mStartText.getGlobalBounds())) {
+				requestStackPush(StateID::Game);
+				return false;
+			}
+			else if (cursor.findIntersection(mExitText.getGlobalBounds())) {
+				getContext().window->close();
+				return false;
+			}
+		}
+	}
+
+	return false;
+}
+
+bool MenuState::update(sf::Time dt)
+{
+	return false;
+}
+
+void MenuState::draw()
+{
+	sf::RenderWindow& window = *getContext().window;
+
+	window.draw(mBackground);
+	window.draw(mTitle);
+	window.draw(mStartText);
+	window.draw(mExitText);
+}
+
 // GAME STATE
 
 GameState::GameState(StateStack& stack, Context context)
@@ -103,9 +173,10 @@ bool PauseState::update(sf::Time dt)
 
 void PauseState::draw()
 {
-	sf::RenderWindow* window = getContext().window;
+	sf::RenderWindow& window = *getContext().window;
 
-	window->setView(window->getDefaultView());
-	window->draw(mFilter);
-	window->draw(mText);
+	window.setView(window.getDefaultView());
+	window.draw(mFilter);
+	window.draw(mText);
 }
+

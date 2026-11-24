@@ -7,7 +7,7 @@ Application::Application()
 	loadTextures();
 	loadFonts();
 	registerStates();
-	mStateStack.pushState(StateID::Game);
+	mStateStack.pushState(StateID::MainMenu);
 }
 
 // Loading resources
@@ -34,7 +34,7 @@ void Application::registerStates()
 	// Register every newly added state here.
 
 	//mStateStack.registerState<TitleState>(StateID::Title);
-	//mStateStack.registerState<MenuState>(StateID::MainMenu);
+	mStateStack.registerState<MenuState>(StateID::MainMenu);
 	mStateStack.registerState<GameState>(StateID::Game);
 	mStateStack.registerState<PauseState>(StateID::Pause);
 }

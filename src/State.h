@@ -74,13 +74,13 @@ private:
 class TitleState : public State
 {
 
-};
+};*/
 
-
+/*
 =====================================
 	MAIN MENU STATE
 =====================================
-
+*/
 
 class MenuState : public State
 {
@@ -97,7 +97,6 @@ private:
 	sf::Text mStartText;
 	sf::Text mExitText;
 };
-*/
 
 /*
 =====================================
