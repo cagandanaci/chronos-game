@@ -1,9 +1,15 @@
 #pragma once
-#include <SFML/Graphics/Rect.hpp>
-#include <SFML/System/Time.hpp>
-#include <SFML/System/Vector2.hpp>
-#include <string>
-#include <unordered_map>
+// The includes aren't needed as all of them are included in PCH (delete this comment after seeing it.
+
+// TODO(Mustafa):
+//
+// 1. Use English comments instead of Turkish ones.
+// 2. Create a non-default constructor for the animation clip.
+// 3. Instead of names, consider using IDs that are stored inside the Animation Clip struct.
+// 4. (IMPORTANT) Use enum classes instead of strings for animation clip names/IDs.
+// 5. (IMPORTANT) A temporary struct is added in World.h for testing the animation with 
+//	  a sprite that uses "character-sheet.png" texture. Use it for testing.
+//
 
 struct AnimationClip
 {
@@ -35,9 +41,17 @@ public:
 	const std::string& getCurrentClipName() const;
 
 private:
+
+/*==================================================================
+*							MEMBER DATA
+*=================================================================*/
+
 	std::unordered_map<std::string, AnimationClip> mClips;
+
 	std::string mCurrentClip;
 	int mCurrentFrame = 0;
+
 	sf::Time mElapsedTime = sf::Time::Zero;
+
 	bool mFinished = false;
 };

@@ -2,6 +2,7 @@
 
 #include "SceneNode.h"
 #include "ResourceManager.h"
+#include "AnimationComponent.h"
 
 /*
 *===============================================================
@@ -49,5 +50,23 @@ private:
 	const TextureManager& mTextureManager;
 
 	sf::Sprite mBackground;
-	// Player pointer here, it will hold player during room transitions.
+
+	/*
+		Temporary struct with a sprite and an animation component for testing.
+	*/
+	struct TempSprite 
+	{
+		explicit TempSprite(const sf::Texture & texture)
+			: mSprite(texture)
+		{}
+
+		sf::Sprite mSprite;
+		AnimationComponent mAnimComp;
+
+		void update(sf::Time dt);
+	};
+
+	TempSprite mTempSprite;
+
+	// Player pointer will be added here, it will hold player during room transitions.
 };

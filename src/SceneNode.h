@@ -19,11 +19,6 @@
 // Sprite nodes are scene nodes with sprites.
 // An implementation can be found in the game development book we have been using.
 
-// TODO(Mustafa): Create the animation component class. It will not be inherited from another class.
-// It will store important information about an entity's sprite sheet.
-// It will also have a function that returns the necessary frame rectangle (as an sf::IntRect object) for the entity class to set as its texture rectangle.
-// That function would step to the next frame, and return the first frame when the clip being used reach its end.
-
 class SceneNode : public sf::Transformable, public sf::Drawable
 {
 public:
