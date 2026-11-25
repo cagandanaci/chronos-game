@@ -1,0 +1,22 @@
+Start X Pos for all of them 	  : 0.f
+Start Y Pos for Animation Index-I : Frame Height x I
+
+Frame Width  : 96.f
+Frame Height : 64.f
+
+Index-0  : Idle
+Index-1  : Running
+Index-2  : Jumping
+Index-3  : Falling
+Index-4  : WallSliding
+Index-5  : SlideStart
+Index-6  : Slide
+Index-7  : SlideEnd
+Index-8  : Attack-1
+Index-9  : Attack-2
+Index-10 : Attack-3
+Index-11 : DamageTaken
+Index-12 : Died
+
+Sprite and its animation created by : MonoPixelArt
+https://monopixelart.itch.io/
