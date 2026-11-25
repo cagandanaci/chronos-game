@@ -19,7 +19,7 @@ if(NOT SFML_FOUND)
     FetchContent_MakeAvailable(SFML)
 endif()
 
-add_executable(main src/main.cpp "src/stdafx.cpp" "src/State.cpp"  "src/StateStack.cpp" "src/Application.cpp" "src/SceneNode.cpp"  "src/World.cpp" "src/AnimationComponent.cpp" "src/AnimationComponent.h")
+add_executable(main src/main.cpp "src/pch.cpp" "src/State.cpp"  "src/StateStack.cpp" "src/Application.cpp" "src/SceneNode.cpp"  "src/World.cpp" "src/AnimationComponent.cpp" "src/AnimationComponent.h")
 add_custom_target(copy_assets ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
         ${CMAKE_SOURCE_DIR}/assets
@@ -29,7 +29,7 @@ add_dependencies(main copy_assets)
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics SFML::System SFML::Audio)
 target_precompile_headers(main PRIVATE
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/stdafx.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.h"
 )
 add_custom_command(TARGET main POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different

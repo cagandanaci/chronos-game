@@ -1,5 +1,5 @@
 #pragma once
-// The includes aren't needed as all of them are included in PCH (delete this comment after seeing it.
+// The includes aren't needed as all of them are already included in PCH, and PCH isn't needed to be included expilicitly. (delete this comment after seeing it).
 
 // TODO(Mustafa):
 //

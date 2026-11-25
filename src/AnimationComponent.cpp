@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "AnimationComponent.h"
 
 void AnimationComponent::addClip(const std::string& name, const AnimationClip& clip)
