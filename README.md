@@ -2,7 +2,7 @@
 
 SFML (Simple and Fast Multimedia Library), Copyright (c) Laurent Gomila, zlib/png license, https://www.sfml-dev.org
 
-**SFML Game Development** — Artur Moreira, Henrik Vogelius Hansson, and  Jan Haller (Packt Publishing, 2013).
+**SFML Game Development** — Jan Haller, Henrik Vogelius Hansson, and  Artur Moreira (Packt Publishing, 2013).
 ISBN 978-1-84969-684-5
 
 This book served as a learning resource and design reference. The following parts are adapted from its examples and modified for our project:
