@@ -11,13 +11,6 @@
 class StateStack
 {
 public:
-	enum Action
-	{
-		Push,
-		Pop,
-		Clear
-	};
-
 	explicit StateStack(State::Context context);
 	
 	// Non-Copyable
@@ -34,23 +27,22 @@ public:
 	void update(sf::Time dt);
 	void draw();
 
-	void pushState(StateID stateID);
-	void popState();
-	void clearStates();
+	void requestAction(StackAction action, StateID id = StateID::Null);
+	void requestPush(StateID id);
+	void requestPop();
+	void requestClear();
 
 	bool isEmpty() const;
 
 private:
 	State::Ptr createState(StateID stateID);
-
 	void applyPendingChanges();
 
-private:
-	struct PendingChange
+	struct PendingAction
 	{
-		PendingChange(Action action, StateID stateID = StateID::NullID) : action(action), stateID(stateID) {}
+		PendingAction(StackAction action, StateID stateID = StateID::Null) : action(action), stateID(stateID) {}
 
-		Action action;
+		StackAction action;
 		StateID stateID;
 	};
 
@@ -58,9 +50,9 @@ private:
 *							MEMBER DATA
 *=================================================================*/
 
-	std::vector<State::Ptr> mStack;
-	std::vector<PendingChange> mPendingList;
 	State::Context mContext;
+	std::vector<State::Ptr> mStack;
+	std::vector<PendingAction> mPendingList;
 	std::map<StateID, std::function<State::Ptr()>> mFactories;
 };
 

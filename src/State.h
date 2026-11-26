@@ -12,13 +12,20 @@
 
 class StateStack;
 
+enum StackAction
+{
+	Push,
+	Pop,
+	Clear
+};
+
 enum class StateID
 {
 	Title,
 	MainMenu,
 	Game,
 	Pause,
-	NullID
+	Null
 };
 
 class State 
@@ -45,11 +52,11 @@ public:
 	// processEvents and update functions.
 	virtual bool processEvents(const std::optional<sf::Event> event) = 0;
 	virtual bool update(sf::Time dt) = 0;
-	
 	virtual void draw() = 0;
 
-protected:
-	void requestStackPush(StateID stateID);
+	void requestStackAction(StackAction action, StateID id = StateID::Null);
+
+	void requestStackPush(StateID id);
 	void requestStackPop();
 	void requestStackClear();
 
@@ -61,7 +68,7 @@ private:
 *							MEMBER DATA
 *=================================================================*/
 
-	StateStack* mStack;
+	StateStack& mStack;
 	Context mContext;
 };
 

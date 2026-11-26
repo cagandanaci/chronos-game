@@ -6,22 +6,27 @@ State::Context::Context(sf::RenderWindow& window, TextureManager& textureManager
 {}
 
 State::State(StateStack& stack, Context context)
-	: mStack(&stack), mContext(context)
+	: mStack(stack), mContext(context)
 {}
 
-void State::requestStackPush(StateID stateID)
+void State::requestStackAction(StackAction action, StateID id)
 {
-	mStack->pushState(stateID);
+	mStack.requestAction(action, id);
+}
+
+void State::requestStackPush(StateID id)
+{
+	mStack.requestPush(id);
 }
 
 void State::requestStackPop()
 {
-	mStack->popState();
+	mStack.requestPop();
 }
 
 void State::requestStackClear()
 {
-	mStack->clearStates();
+	mStack.requestClear();
 }
 
 State::Context State::getContext() const

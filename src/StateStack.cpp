@@ -34,24 +34,27 @@ void StateStack::draw()
 	}
 }
 
-// Action Requests
-
-void StateStack::pushState(StateID stateID)
-{
-	mPendingList.emplace_back(Push, stateID);
-}
-
-void StateStack::popState()
-{
-	mPendingList.emplace_back(Pop);	
-}
-
-void StateStack::clearStates()
-{
-	mPendingList.emplace_back(Clear);
-}
-
 // Functions
+
+void StateStack::requestAction(StackAction action, StateID id)
+{
+	mPendingList.emplace_back(action, id);
+}
+
+void StateStack::requestPush(StateID id)
+{
+	requestAction(StackAction::Push, id);
+}
+
+void StateStack::requestPop()
+{
+	requestAction(StackAction::Pop);
+}
+
+void StateStack::requestClear()
+{
+	requestAction(StackAction::Clear);
+}
 
 bool StateStack::isEmpty() const
 {
@@ -68,7 +71,7 @@ State::Ptr StateStack::createState(StateID stateID)
 
 void StateStack::applyPendingChanges()
 {
-	for (const PendingChange change : mPendingList)
+	for (const PendingAction change : mPendingList)
 	{
 		switch (change.action)
 		{

@@ -7,7 +7,7 @@ Application::Application()
 	loadTextures();
 	loadFonts();
 	registerStates();
-	mStateStack.pushState(StateID::MainMenu);
+	mStateStack.requestPush(StateID::MainMenu);
 }
 
 // Loading resources
