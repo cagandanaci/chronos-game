@@ -1,23 +1,23 @@
 #include "AnimationComponent.h"
 
-void AnimationComponent::addClip(const std::string& name, const AnimationClip& clip)
+void AnimationComponent::addClip(const AnimationClip& clip)
 {
-	mClips[name] = clip;
-	if (mCurrentClip.empty())
+	mClips[clip.id] = clip;
+	if (mCurrentClip == AnimationID::None)
 	{
-		play(name, true);
+		play(clip.id, true);
 	}
 }
 
-void AnimationComponent::play(const std::string& name, bool resetIfSame)
+void AnimationComponent::play(AnimationID id, bool resetIfSame)
 {
-	if (mClips.find(name) == mClips.end())
+	if (mClips.find(id) == mClips.end())
 		return;
 
-	if (mCurrentClip == name && !resetIfSame)
+	if (mCurrentClip == id && !resetIfSame)
 		return;
 
-	mCurrentClip = name;
+	mCurrentClip = id;
 	mCurrentFrame = 0;
 	mElapsedTime = sf::Time::Zero;
 	mFinished = false;
@@ -45,7 +45,7 @@ sf::IntRect AnimationComponent::update(sf::Time dt)
 		}
 		else if (clip.isLooping)
 		{
-			mCurrentFrame = 0; // Sona ulaşınca ilk kareye döner
+			mCurrentFrame = 0; // Loop back to the first frame
 		}
 		else
 		{
@@ -75,7 +75,7 @@ bool AnimationComponent::isFinished() const
 	return mFinished;
 }
 
-const std::string& AnimationComponent::getCurrentClipName() const
+AnimationID AnimationComponent::getCurrentClipID() const
 {
 	return mCurrentClip;
 }

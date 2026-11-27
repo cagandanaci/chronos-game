@@ -1,23 +1,42 @@
 #pragma once
-// The includes aren't needed as all of them are already included in PCH, and PCH isn't needed to be included expilicitly. (delete this comment after seeing it).
 
-// TODO(Mustafa):
-//
-// 1. Use English comments instead of Turkish ones.
-// 2. Create a non-default constructor for the animation clip.
-// 3. Instead of names, consider using IDs that are stored inside the Animation Clip struct.
-// 4. (IMPORTANT) Use enum classes instead of strings for animation clip names/IDs.
-// 5. (IMPORTANT) A temporary struct is added in World.h for testing the animation with 
-//	  a sprite that uses "character-sheet.png" texture. Use it for testing.
-//
+enum class AnimationID
+{
+	None,
+	Idle,
+	Running,
+	Jumping,
+	Falling,
+	WallSliding,
+	SlideStart,
+	Slide,
+	SlideEnd,
+	Attack1,
+	Attack2,
+	Attack3,
+	DamageTaken,
+	Died
+};
 
 struct AnimationClip
 {
-	sf::Vector2i startPosition; // Sprite sheet üzerindeki başlangıç (x, y) pikseli
-	sf::Vector2i frameSize;     // Tek bir karenin (genişlik, yükseklik) boyutu
-	int frameCount = 1;         // Klipteki toplam kare sayısı
-	sf::Time duration;          // Kareler arası geçiş süresi
-	bool isLooping = true;      // Sona gelince başa sarsın mı?
+	AnimationClip() = default;
+	AnimationClip(AnimationID id, sf::Vector2i startPos, sf::Vector2i size, int frames, sf::Time frameDuration, bool loop = true)
+		: id(id)
+		, startPosition(startPos)
+		, frameSize(size)
+		, frameCount(frames)
+		, duration(frameDuration)
+		, isLooping(loop)
+	{
+	}
+
+	AnimationID id = AnimationID::None;
+	sf::Vector2i startPosition{ 0, 0 }; // Starting (x, y) pixel on the sprite sheet
+	sf::Vector2i frameSize{ 0, 0 };     // Width and height of a single frame
+	int frameCount = 1;                 // Total number of frames in the clip
+	sf::Time duration = sf::Time::Zero; // Duration per frame
+	bool isLooping = true;              // Should the animation loop when finished?
 };
 
 class AnimationComponent
@@ -25,33 +44,30 @@ class AnimationComponent
 public:
 	AnimationComponent() = default;
 
-	// Yeni bir animasyon klibi (örneğin "Idle", "Run", "Attack") ekler
-	void addClip(const std::string& name, const AnimationClip& clip);
+	// Adds a new animation clip using its internal AnimationID
+	void addClip(const AnimationClip& clip);
 
-	// Belirtilen klibi başlatır (zaten oynuyorsa sıfırlamaz)
-	void play(const std::string& name, bool resetIfSame = false);
+	// Plays the specified clip (does not restart if already playing unless resetIfSame is true)
+	void play(AnimationID id, bool resetIfSame = false);
 
-	// Süreyi günceller, gerekirse sonraki kareye geçer ve güncel sf::IntRect döndürür
+	// Advances elapsed time, updates the current frame, and returns the active sf::IntRect
 	sf::IntRect update(sf::Time dt);
 
-	// Update çağırmadan o anki karenin dikdörtgenini almak için
+	// Returns the current frame rectangle without advancing time
 	sf::IntRect getCurrentFrameRect() const;
 
 	bool isFinished() const;
-	const std::string& getCurrentClipName() const;
+	AnimationID getCurrentClipID() const;
 
 private:
+	/*==================================================================
+	*							MEMBER DATA
+	*=================================================================*/
+	std::unordered_map<AnimationID, AnimationClip> mClips;
 
-/*==================================================================
-*							MEMBER DATA
-*=================================================================*/
-
-	std::unordered_map<std::string, AnimationClip> mClips;
-
-	std::string mCurrentClip;
+	AnimationID mCurrentClip = AnimationID::None;
 	int mCurrentFrame = 0;
 
 	sf::Time mElapsedTime = sf::Time::Zero;
-
 	bool mFinished = false;
 };
