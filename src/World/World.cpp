@@ -15,7 +15,7 @@ World::World(sf::RenderWindow& window, const TextureManager& textureManager)
 	mTempSprite.mAnimComp.addClip({ AnimationID::Attack1,{ 0, 64 * 8 },{ 96, 64 }, 7, sf::seconds(0.08f), true });
 
 	// Test etmek istediğin animasyonu seç (Idle, Running veya Attack1)
-	mTempSprite.mAnimComp.play(AnimationID::Running);
+	mTempSprite.mAnimComp.play(AnimationID::Attack1);
 
 	mTempSprite.mSprite.setTextureRect(mTempSprite.mAnimComp.getCurrentFrameRect());
 	mTempSprite.mSprite.setScale({ 3.f, 3.f }); // Ekranda rahat görmek için 3x büyütme

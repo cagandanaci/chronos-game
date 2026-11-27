@@ -28,8 +28,7 @@ struct AnimationClip
 		, frameCount(frames)
 		, duration(frameDuration)
 		, isLooping(loop)
-	{
-	}
+	{}
 
 	AnimationID id = AnimationID::None;
 	sf::Vector2i startPosition{ 0, 0 }; // Starting (x, y) pixel on the sprite sheet
