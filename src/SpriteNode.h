@@ -2,12 +2,6 @@
 
 #include "SceneNode.h"
 
-#include <optional>
-
-#include <SFML/Graphics/Rect.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
-
 /*
 *===============================================================
 *					SPRITE NODE CLASS
