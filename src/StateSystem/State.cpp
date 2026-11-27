@@ -43,8 +43,8 @@ MenuState::MenuState(StateStack& stack, Context context)
 	mStartText(getContext().fontManager->get(FontID::PixelOp)),
 	mExitText(getContext().fontManager->get(FontID::PixelOp))
 {
-	mTitle.setCharacterSize(48);
-	mTitle.setString("SOME ROGUELIKE GAME");
+	mTitle.setCharacterSize(64);
+	mTitle.setString("CHRONOS");
 	mTitle.setFillColor(sf::Color(190,0,0));
 	mTitle.setOutlineColor(sf::Color::Black);
 	mTitle.setOutlineThickness(1.f);
@@ -56,7 +56,7 @@ MenuState::MenuState(StateStack& stack, Context context)
 	mStartText.setOutlineColor(sf::Color::Black);
 	mStartText.setOutlineThickness(1.f);
 	mStartText.setOrigin(mTitle.getLocalBounds().position + mTitle.getGlobalBounds().size / 2.f);
-	mStartText.setPosition(sf::Vector2f(getContext().window->getSize().x * 7.f / 8.f, getContext().window->getSize().y / 2.f));
+	mStartText.setPosition(sf::Vector2f(getContext().window->getSize().x * 6.5f / 8.f, getContext().window->getSize().y / 2.f));
 
 	mExitText = mStartText;
 	mExitText.setString("EXIT");
