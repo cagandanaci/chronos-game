@@ -17,7 +17,7 @@ They have been modified to fit the requirements of our project.
 # Credits
 
 Special thanks to **MonoPixelArt** for creating and publishing the free sprite pack used in our project.  
-- Creator's Page: https://monopixelart.itch.io/  
+- Creator's Page: https://itch.io/profile/monopixelart
 - Asset Pack: https://monopixelart.itch.io/character-pack  
 - Terms on the pack's page (15/11/2026): "Feel free to use this asset pack in any project, commercial or not, but refrain from reselling and redistributing."
 - The team rearranged the pack’s animations into a single sprite sheet.
