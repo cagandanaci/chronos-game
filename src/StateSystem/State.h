@@ -3,6 +3,14 @@
 #include "ResourceManager.h"
 #include "World.h"
 
+// TODO(Bedirhan): Implement the title state. For now use the temp menu background, 
+// this will be changed later with its own background. Create the title with sf::Text,
+// this will also be changed later as its own background will include a title.
+// Create another text that fades in and out with a timer and reads "Press any key to continue...", 
+// and when any keyboard key is pressed, TitleState must request a push for the MenuState.
+//
+// Don't forget to push TitleState in application start from Application.cpp.
+
 /*
 *===============================================================
 *						STATE CLASS

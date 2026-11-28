@@ -29,18 +29,18 @@ public:
 
 	// Enables or disables this node's participation in collision checks.
 	void setCollisionEnabled(bool enabled) noexcept;
-	[[nodiscard]] bool isCollisionEnabled() const noexcept;
+	bool isCollisionEnabled() const noexcept;
 
-	// Returns this sprite's axis-aligned bounding box (AABB) in world coordinates.
-	[[nodiscard]] sf::FloatRect getCollisionBounds() const;
+	// Returns this sprite's bounding box in world coordinates.
+	sf::FloatRect getCollisionBounds() const;
 
 	// Returns the overlapping rectangle of the two nodes' bounds, or std::nullopt
 	// if either node has collision disabled or the bounds do not overlap.
 	// The size of the overlap tells how deep the nodes are inside each other.
-	[[nodiscard]] std::optional<sf::FloatRect> getOverlap(const SpriteNode& other) const;
+	std::optional<sf::FloatRect> getOverlap(const SpriteNode& other) const;
 
 	// Returns true only when both nodes have collision enabled and their bounds overlap.
-	[[nodiscard]] bool collidesWith(const SpriteNode& other) const;
+	bool collidesWith(const SpriteNode& other) const;
 
 private:
 	// SceneNode calls this when it draws the scene graph.

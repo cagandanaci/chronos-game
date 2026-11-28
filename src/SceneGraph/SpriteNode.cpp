@@ -29,9 +29,7 @@ bool SpriteNode::isCollisionEnabled() const noexcept
 
 sf::FloatRect SpriteNode::getCollisionBounds() const
 {
-	// The sprite's local bounds are transformed by this node's transform combined with all of its parents' transforms.
-	// The result is an axis-aligned bounding box (AABB) in world coordinates.
-	return getWorldTransform().transformRect(mSprite.getLocalBounds());
+	return getWorldTransform().transformRect(mSprite.getGlobalBounds());
 }
 
 std::optional<sf::FloatRect> SpriteNode::getOverlap(const SpriteNode& other) const

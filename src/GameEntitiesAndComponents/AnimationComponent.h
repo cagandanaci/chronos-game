@@ -1,5 +1,17 @@
 #pragma once
 
+// TODO(name): The current AnimationClip constructor is hard to use because the 
+// code that plays a clip has to know the sheet's pixel layout, such as the 
+// starting y position.
+//
+// Idea: describe the sheet once (frame size), define each clip as {row, frames,
+// seconds per frame}, and let everything else call play(id) with an enum value.
+// The component works out the rectangle from the row and the current frame.
+// Each entity type can have its own animation enum, so the shared AnimationID
+// list (with player-only names and None) goes away.
+//
+// After you are done test it with maybe a second TempSprite.
+
 enum class AnimationID
 {
 	None,
@@ -21,18 +33,25 @@ enum class AnimationID
 struct AnimationClip
 {
 	AnimationClip() = default;
-	AnimationClip(AnimationID id, sf::Vector2i startPos, sf::Vector2i size, int frames, sf::Time frameDuration, bool loop = true)
+
+	AnimationClip(AnimationID id, 
+		sf::Vector2i size, 
+		sf::Vector2i startPos = { 0, 0 },
+		int frames = 1,
+		sf::Time frameDuration = sf::Time::Zero, 
+		bool loop = true
+	)
 		: id(id)
-		, startPosition(startPos)
 		, frameSize(size)
+		, startPosition(startPos)
 		, frameCount(frames)
 		, duration(frameDuration)
 		, isLooping(loop)
 	{}
 
 	AnimationID id = AnimationID::None;
-	sf::Vector2i startPosition{ 0, 0 }; // Starting (x, y) pixel on the sprite sheet
 	sf::Vector2i frameSize{ 0, 0 };     // Width and height of a single frame
+	sf::Vector2i startPosition{ 0, 0 }; // Starting (x, y) pixel on the sprite sheet
 	int frameCount = 1;                 // Total number of frames in the clip
 	sf::Time duration = sf::Time::Zero; // Duration per frame
 	bool isLooping = true;              // Should the animation loop when finished?

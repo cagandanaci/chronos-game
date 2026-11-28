@@ -10,9 +10,9 @@ World::World(sf::RenderWindow& window, const TextureManager& textureManager)
 	mTempSprite(mTextureManager.get(TextureID::Player))
 {
 	// Frame Width: 96, Frame Height: 64
-	mTempSprite.mAnimComp.addClip({ AnimationID::Idle,{ 0, 64 * 0 },{ 96, 64 }, 8, sf::seconds(0.1f),  true });
-	mTempSprite.mAnimComp.addClip({ AnimationID::Running,{ 0, 64 * 1 },{ 96, 64 }, 8, sf::seconds(0.08f), true });
-	mTempSprite.mAnimComp.addClip({ AnimationID::Attack1,{ 0, 64 * 8 },{ 96, 64 }, 7, sf::seconds(0.08f), true });
+	mTempSprite.mAnimComp.addClip({ AnimationID::Idle, { 96, 64 },{ 0, 64 * 1 }, 8, sf::seconds(0.1f),  true });
+	mTempSprite.mAnimComp.addClip({ AnimationID::Running, { 96, 64 }, { 0, 64 * 8 }, 8, sf::seconds(0.08f), true });
+	mTempSprite.mAnimComp.addClip({ AnimationID::Attack1, { 96, 64 },{ 0, 64 * 7 }, 7, sf::seconds(0.08f), true });
 
 	// Test etmek istediğin animasyonu seç (Idle, Running veya Attack1)
 	mTempSprite.mAnimComp.play(AnimationID::Attack1);
